@@ -53,7 +53,8 @@ Nginx Proxy Manager  (proxy-network, ports 80/443/81)
    ├── Open WebUI      (chat UI for the local LLM)
    ├── TTS API
    ├── Translate API
-   └── STT API
+   ├── STT API
+   └── VEJI Decision API
 ```
 
 Everything runs as Docker containers on a single bridge network
@@ -114,6 +115,7 @@ and re-run the next script afterward.
 | 10 | `10-tts-api.sh` | Self-hosted text-to-speech API |
 | 11 | `11-translate-api.sh` | Self-hosted translation API |
 | 12 | `12-stt-api.sh` | Self-hosted speech-to-text API (Arabic + others) |
+| 13 | `13-veji-api.sh` | Self-hosted VEJI-V2 Decision API |
 | — | `n8n/backup.sh`, `n8n/restore.sh` | Export/import n8n workflows, credentials, and encryption key |
 
 After each service script, the last step it prints is the Nginx Proxy
