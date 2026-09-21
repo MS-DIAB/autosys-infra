@@ -84,4 +84,4 @@ print_success "Firewall configured and reloaded"
 echo "Active firewall rules:"
 sudo firewall-cmd --list-ports
 
-confirm_reboot
+confirm_reboot 
