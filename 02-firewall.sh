@@ -63,23 +63,25 @@ print_success "Firewall service enabled"
 
 echo "Adding firewall rules..."
 
-# HTTP & HTTPS (Nginx Proxy Manager)
+# HTTP & HTTPS (Nginx Proxy Manager) + NPM admin UI
 sudo firewall-cmd --add-port=80/tcp --permanent
 sudo firewall-cmd --add-port=443/tcp --permanent
 sudo firewall-cmd --add-port=81/tcp --permanent
-print_success "Added HTTP/HTTPS ports (80, 443, 81)"
+print_success "Added HTTP/HTTPS/NPM-admin ports (80, 443, 81)"
 
-# Email Ports
-sudo firewall-cmd --add-port=25/tcp --permanent    # SMTP
-sudo firewall-cmd --add-port=465/tcp --permanent   # SMTPS
-sudo firewall-cmd --add-port=587/tcp --permanent   # Submission
-sudo firewall-cmd --add-port=143/tcp --permanent   # IMAP
-sudo firewall-cmd --add-port=993/tcp --permanent   # IMAPS
-sudo firewall-cmd --add-port=110/tcp --permanent   # POP3
-sudo firewall-cmd --add-port=995/tcp --permanent   # POP3S
-print_success "Added Email ports (25, 465, 587, 143, 993, 110, 995)"
+# NOTE: This stack does not deploy a mail server anywhere (no script,
+# compose file, or README section sets one up), so SMTP/IMAP/POP3 ports
+# are intentionally NOT opened here. Opening 25/465/587/143/993/110/995
+# with nothing listening behind them is pure unnecessary attack surface
+# (port 25 especially draws constant scanning/relay-abuse attempts). If
+# you later add a mail service to this stack, open only the specific
+# ports it needs at that point.
 
 echo "Reloading firewall..."
 sudo firewall-cmd --reload
 print_success "Firewall configured and reloaded"
+
+echo "Active firewall rules:"
+sudo firewall-cmd --list-ports
+
 confirm_reboot
