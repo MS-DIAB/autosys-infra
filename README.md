@@ -150,6 +150,6 @@ setup, the public hostname to add in the Cloudflare dashboard.
   swap `MODEL_URL`/`MODEL_FILE` near the top if you want a different size
   or model.
 
-## License
+## License 
 
 MIT — see `LICENSE`.
